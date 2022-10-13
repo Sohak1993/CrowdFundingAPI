@@ -1,0 +1,14 @@
+﻿CREATE TABLE [dbo].[Project]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	IdOwner INT NOT NULL,
+	Title VARCHAR(50) NOT NULL,
+	Description VARCHAR(150),
+	Goal INT NOT NULL,
+	BeginDate DATE NOT NULL,
+	EndDate DATE NOT NULL,
+	IdUser INT NOT NULL,
+   
+   FOREIGN KEY(IdUser) REFERENCES [User]([Id])
+
+)
