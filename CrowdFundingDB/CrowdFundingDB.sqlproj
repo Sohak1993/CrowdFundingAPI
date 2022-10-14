@@ -72,4 +72,7 @@
   <ItemGroup>
     <None Include="CrowdFundingDB.publish.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment1.sql" />
+  </ItemGroup>
 </Project>
