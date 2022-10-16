@@ -7,9 +7,9 @@ BEGIN
 	SELECT @salt = Salt FROM [User] WHERE Email = @email
 
 	DECLARE @hash VARBINARY(64)
-	SET @hash = HASHBYTES('SHA_512', CONCAT(@salt, @password, @salt))
+	SET @hash = HASHBYTES('SHA2_512', CONCAT(@salt, @password, @salt))
+
 	SELECT Id, NickName, Email, BirthDate 
 	FROM [User]
 	WHERE Password = @hash AND Email = @email
 END
-

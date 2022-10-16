@@ -7,15 +7,17 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToolBox;
+using ToolBox.Mapper;
+using ToolBox.Models;
 
 namespace DAL.Repositories
 {
-    public class UserRepo : IUserService
+    public class UserRepo : Connection, IUserService
     {
-        private readonly string _connectionString;
-        public UserRepo(IConfiguration config)
+        public UserRepo(IConfiguration config) : base(config)
         {
-            _connectionString = config.GetConnectionString("default");
+
         }
         public IEnumerable<User> GetAll()
         {
@@ -24,20 +26,13 @@ namespace DAL.Repositories
 
         public User Login(string email, string password)
         {
-            using(SqlConnection cnx = new SqlConnection(_connectionString))
-            {
-                using(SqlCommand cmd = cnx.CreateCommand())
-                {
-                    cmd.CommandText = "Login";
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            Command cmd = new Command("Login", true);
+            cmd.AddParameter("email", email);
+            cmd.AddParameter("password", password);
 
-                    cmd.Parameters.AddWithValue("password", password);
-                    cmd.Parameters.AddWithValue("email", email);
+            IEnumerable<User> users = ExecuteReader<User>(cmd);
 
-                    cnx.Open();
-                    return (User)cmd.ExecuteScalar();
-                }
-            }
+            return users.First();
         }
 
         public bool RegisterUser(string nickname, string email, string password, DateOnly birthdate)

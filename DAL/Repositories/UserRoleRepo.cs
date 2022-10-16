@@ -3,14 +3,16 @@ using DAL.Models;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToolBox.Mapper;
 
 namespace DAL.Repositories
 {
-    public class UserRoleRepo : IUserRoleService
+    public class UserRoleRepo : DataToModel, IUserRoleService
     {
         private readonly string _connectionString;
         public UserRoleRepo(IConfiguration config)
@@ -24,21 +26,18 @@ namespace DAL.Repositories
             {
                 using(SqlCommand cmd = cnx.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT * FROM V_Role_User";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "Role_User";
 
                     cmd.Parameters.AddWithValue("userId", userId);
 
                     cnx.Open();
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
-                        {
-                            Roles.Add((Role)reader["Name"]);
-                        }
+                        return GetList<Role>(reader);
                     }
                 }
             }
-            return Roles;
         }
     }
 }

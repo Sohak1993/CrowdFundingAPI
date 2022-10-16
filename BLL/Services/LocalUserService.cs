@@ -1,17 +1,17 @@
 ﻿using BLL.Interface;
 using BLL.Models;
-using DLL.Models;
 using DAL.Interface;
-using BLL.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToolBox.Mapper;
+using DALM = DAL.Models;
 
 namespace BLL.Services
 {
-    public class LocalUserService : ILocalUserService
+    public class LocalUserService : ObjectMapper, ILocalUserService
     {
         private readonly IUserService _userRepo;
         private readonly IUserRoleService _userRoleRepo;
@@ -24,13 +24,21 @@ namespace BLL.Services
 
         public IEnumerable<User> GetAll()
         {
-            return _userRepo.GetAll().Select(x => x.ToBll());
+            //return _userRepo.GetAll().Select(x => x.ToBll());
+            return null;
         }
 
         public User Login(string email, string password)
         {
-            User user = _userRepo.Login(email, password).ToBll();
-            user.Roles = _userRoleRepo.GetRolesByUser(user.Id).Select(x => x.ToBll());
+            User user = MapModel<User, DALM.User>(_userRepo.Login(email, password));
+
+            user.Roles = _userRoleRepo.GetRolesByUser(user.Id).Select(role => 
+                MapModel<Role, DALM.Role>(role)
+            );
+
+            //User user = _userRepo.Login(email, password).ToBll();
+            //user.Roles = _userRoleRepo.GetRolesByUser(user.Id).Select(x => x.ToBll());
+            return user;
         }
 
         public bool RegisterUser(string nickname, string email, string password, DateOnly birthdate)
