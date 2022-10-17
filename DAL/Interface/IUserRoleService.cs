@@ -10,5 +10,7 @@ namespace DAL.Interface
     public interface IUserRoleService
     {
         public IEnumerable<Role> GetRolesByUser(int userId);
+        public bool addOwner(int id);
+        public bool removeOwner(int id);
     }
 }

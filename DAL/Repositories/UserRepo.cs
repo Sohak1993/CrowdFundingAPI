@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,11 +37,6 @@ namespace DAL.Repositories
         }
 
         public bool RegisterUser(string nickname, string email, string password, DateOnly birthdate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool UpdateUser(int id)
         {
             throw new NotImplementedException();
         }

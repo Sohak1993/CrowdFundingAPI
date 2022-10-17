@@ -1,6 +1,8 @@
 ﻿using BLL.Interface;
 using BLL.Models;
 using DAL.Interface;
+using DAL.Repositories;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,20 +37,27 @@ namespace BLL.Services
             user.Roles = _userRoleRepo.GetRolesByUser(user.Id).Select(role => 
                 MapModel<Role, DALM.Role>(role)
             );
-
-            //User user = _userRepo.Login(email, password).ToBll();
-            //user.Roles = _userRoleRepo.GetRolesByUser(user.Id).Select(x => x.ToBll());
-            return user;
+        return user;
         }
 
         public bool RegisterUser(string nickname, string email, string password, DateOnly birthdate)
         {
             return _userRepo.RegisterUser(nickname, email, password, birthdate);
         }
-
-        public bool UpdateUser(int id)
+        /// <summary>
+        /// Passer du status de baker a owner et inversement
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public void swapUserStatus(int id)
         {
-            throw new NotImplementedException();
+            IEnumerable<Role> roles = _userRoleRepo.GetRolesByUser(id).Select(role => MapModel<Role, DALM.Role>(role));
+            foreach (Role role in roles)
+            {
+                if (role.Name == "Owner") _userRoleRepo.addOwner(id);
+                else _userRoleRepo.removeOwner(id); 
+            }
         }
     }
 }
