@@ -7,10 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Interface\" />
     <Folder Include="Services\" />
     <Folder Include="Models\" />
-    <Folder Include="Mappers\" />
-    <Folder Include="Interface\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\ToolBox\ToolBox.csproj" />
   </ItemGroup>
 
 </Project>
