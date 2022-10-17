@@ -24,8 +24,14 @@ namespace BLL.Services
 
         public IEnumerable<User> GetAll()
         {
-            //return _userRepo.GetAll().Select(x => x.ToBll());
-            return null;
+            return _userRepo.GetAll().Select(user => 
+                MapModel<User, DALM.User>(user)
+            ); 
+        }
+
+        public User GetOne(int idUser)
+        {
+            return MapModel<User, DALM.User>(_userRepo.GetOne(idUser));
         }
 
         public User Login(string email, string password)
@@ -35,9 +41,6 @@ namespace BLL.Services
             user.Roles = _userRoleRepo.GetRolesByUser(user.Id).Select(role => 
                 MapModel<Role, DALM.Role>(role)
             );
-
-            //User user = _userRepo.Login(email, password).ToBll();
-            //user.Roles = _userRoleRepo.GetRolesByUser(user.Id).Select(x => x.ToBll());
             return user;
         }
 

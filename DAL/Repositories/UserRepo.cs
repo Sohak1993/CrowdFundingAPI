@@ -21,7 +21,16 @@ namespace DAL.Repositories
         }
         public IEnumerable<User> GetAll()
         {
-            throw new NotImplementedException();
+            Command cmd = new Command("SELECT * FROM V_Users");
+            return ExecuteReader<User>(cmd);
+        }
+
+        public User GetOne(int idUser)
+        {
+            Command cmd = new Command("GetUser", true);
+            cmd.AddParameter("idUser", idUser);
+
+            return ExecuteReader<User>(cmd).First();
         }
 
         public User Login(string email, string password)
@@ -30,9 +39,7 @@ namespace DAL.Repositories
             cmd.AddParameter("email", email);
             cmd.AddParameter("password", password);
 
-            IEnumerable<User> users = ExecuteReader<User>(cmd);
-
-            return users.First();
+            return ExecuteReader<User>(cmd).First();
         }
 
         public bool RegisterUser(string nickname, string email, string password, DateOnly birthdate)

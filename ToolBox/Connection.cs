@@ -42,6 +42,19 @@ namespace ToolBox
             }
         }
 
+        public virtual int ExecuteNonQuery(Command command)
+        {
+            using(SqlConnection cnx = GetConnection())
+            {
+                using(SqlCommand cmd = CreateCommand(cnx, command))
+                {
+                    cnx.Open();
+                    return cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
         private SqlCommand CreateCommand(SqlConnection cnx, Command command)
         {
             SqlCommand cmd = cnx.CreateCommand();
