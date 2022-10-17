@@ -1,7 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[UserRoleRegister]
-	@email VARCHAR(100)
+	@email VARCHAR(100),
+	@idRole int,
+	@idUser int
 AS
-	DECLARE @userId INT
-	SELECT @userId = Id FROM [User] WHERE Email = @email
-	INSERT INTO User_Role (IdRole, IdUser) VALUES (2, @userId)
-RETURN 0
+BEGIN
+	SELECT @idUser = Id FROM [User] WHERE Email = @email
+	INSERT INTO User_Role (IdRole, IdUser) VALUES (@idRole, @idUser)
+END

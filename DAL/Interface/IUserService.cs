@@ -12,6 +12,8 @@ namespace DAL.Interface
         IEnumerable<User> GetAll();
         User Login(string email, string password);
         bool RegisterUser(string nickname, string email, string password, DateOnly birthdate);
-        bool UpdateUser(int id);
+        bool UpdateUser(int id, string nickName, string email, DateOnly birthdate);
+        public User GetOne(int idUser);
+        public bool DeleteUser(int id);
     }
 }

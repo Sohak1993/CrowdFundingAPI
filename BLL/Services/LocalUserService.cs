@@ -44,14 +44,17 @@ namespace BLL.Services
             return user;
         }
 
-        public bool RegisterUser(string nickname, string email, string password, DateOnly birthdate)
+        public bool RegisterUser(string nickname, string email, string password, DateOnly birthdate, int idRole)
         {
-            return _userRepo.RegisterUser(nickname, email, password, birthdate);
+            bool isRegister = _userRepo.RegisterUser(nickname, email, password, birthdate);
+            bool isRegisterRole = _userRoleRepo.RegisterRoleUser(email, idRole);
+            return (isRegister && isRegisterRole);
         }
 
-        public bool UpdateUser(int id)
+        public bool UpdateUser(int idUser, string nickname, string email, DateOnly birthdate)
         {
-            throw new NotImplementedException();
+            bool isRegister = _userRepo.UpdateUser(idUser, nickname, email, birthdate);
+            return isRegister;
         }
     }
 }

@@ -10,5 +10,6 @@ namespace DAL.Interface
     public interface IUserRoleService
     {
         public IEnumerable<Role> GetRolesByUser(int userId);
+        bool RegisterRoleUser(string email, int idRole);
     }
 }

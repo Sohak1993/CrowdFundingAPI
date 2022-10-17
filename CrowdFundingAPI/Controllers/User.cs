@@ -1,5 +1,5 @@
 ﻿using BLL.Interface;
-using CrowdFundingAPI.Models;
+using CrowdFundingAPI.Models.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +30,7 @@ namespace CrowdFundingAPI.Controllers
         [HttpPost("register")]
         public IActionResult Register(UserForm user)
         {
-            return Ok(_LocalUserService.RegisterUser(user.NickName, user.Email, user.Password, user.BirthDate));
+            return Ok(_LocalUserService.RegisterUser(user.NickName, user.Email, user.Password, user.BirthDate, user.idRole));
         }
         [HttpPost("downgradeUser")]
         public IActionResult downgradeUser()

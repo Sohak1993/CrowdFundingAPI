@@ -16,11 +16,15 @@ INSERT INTO Role (Name) VALUES
 
 DECLARE @date DATE
 DECLARE @email VARCHAR(100)
+DECLARE @idUser int
+DECLARE @idRole int
 
 SET @date = CONVERT(date, '1993-09-20')
 SET @email = 'm@m.m'
+SET @idUser = 1
+SET @idRole = 3
 
 EXEC RegisterUser 'Sohak', @email, 'test1223', @date
-EXEC UserRoleRegister @email
+EXEC UserRoleRegister @idUser
 
 
