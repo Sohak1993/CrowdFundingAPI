@@ -30,6 +30,7 @@ namespace ToolBox.Mapper
                 }
                 list.Add(obj);
             }
+
             return list;
         }
     }
