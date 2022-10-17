@@ -32,16 +32,5 @@ namespace CrowdFundingAPI.Controllers
         {
             return Ok(_LocalUserService.RegisterUser(user.NickName, user.Email, user.Password, user.BirthDate));
         }
-
-        [HttpPost("upgradeUser")]
-        public IActionResult upgradeUser()
-        {
-        return null;
-        }
-        [HttpPost("downgradeUser")]
-        public IActionResult downgradeUser()
-        {
-            return null;
-        }
     }
 }
