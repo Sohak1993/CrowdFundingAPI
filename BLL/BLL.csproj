@@ -7,16 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
     <Folder Include="Services\" />
     <Folder Include="Models\" />
     <Folder Include="Mappers\" />
     <Folder Include="Interface\" />
-=======
     <ProjectReference Include="..\DAL\DAL.csproj" />
->>>>>>> Stashed changes
-=======
     <Folder Include="Interface\" />
     <Folder Include="Services\" />
     <Folder Include="Models\" />
@@ -25,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
     <ProjectReference Include="..\ToolBox\ToolBox.csproj" />
->>>>>>> 87d9a2e5c386c7487f03754b2869b3d470d937c1
   </ItemGroup>
 
 </Project>
