@@ -68,8 +68,15 @@
     <Build Include="Tables\Role.sql" />
     <Build Include="Tables\Step.sql" />
     <Build Include="Tables\User_Role.sql" />
+    <Build Include="StoredProcedure\Login.sql" />
+    <Build Include="StoredProcedure\Role_User.sql" />
+    <Build Include="StoredProcedure\UserRegister.sql" />
+    <Build Include="StoredProcedure\UserRoleRegister.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CrowdFundingDB.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment1.sql" />
   </ItemGroup>
 </Project>
