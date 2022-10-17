@@ -2,7 +2,11 @@ using BLL.Interface;
 using BLL.Services;
 using DAL.Interface;
 using DAL.Repositories;
+<<<<<<< HEAD
 
+=======
+using System.Text.Json;
+>>>>>>> 87d9a2e5c386c7487f03754b2869b3d470d937c1
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +17,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+<<<<<<< HEAD
 builder.Services.AddScoped<IProjectRepo, ProjectRepo>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
+=======
+builder.Services.AddScoped<IUserService, UserRepo>();
+builder.Services.AddScoped<IUserRoleService, UserRoleRepo>();
+
+builder.Services.AddScoped<ILocalUserService, LocalUserService>();
+
+
+>>>>>>> 87d9a2e5c386c7487f03754b2869b3d470d937c1
 
 var app = builder.Build();
 

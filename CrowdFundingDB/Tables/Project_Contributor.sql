@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Project_Contributor]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
 	IdProject INT,
 	IdUser INT NOT NULL,
 	Amount INT,
