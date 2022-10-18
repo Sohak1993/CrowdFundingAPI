@@ -6,5 +6,4 @@
 
 	FOREIGN KEY(IdUser) REFERENCES [User](Id),
 	FOREIGN KEY(IdRole) REFERENCES Role(Id)
-
 )

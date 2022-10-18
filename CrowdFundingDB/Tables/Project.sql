@@ -7,9 +7,7 @@
 	Goal INT NOT NULL,
 	BeginDate DATE NOT NULL,
 	EndDate DATE NOT NULL,
-	IdUser INT NOT NULL,
 	isValidate BINARY DEFAULT 0 NOT NULL,
    
-   FOREIGN KEY(IdUser) REFERENCES [User]([Id])
-
+	FOREIGN KEY(IdOwner) REFERENCES [User]([Id])
 )
