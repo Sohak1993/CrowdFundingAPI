@@ -31,11 +31,11 @@ namespace DAL.Repositories
         public bool RegisterRoleUser(string email, int idRole)
         {
             Command cmd = new Command("UserRoleRegister", true);
-            List<Role> Roles = new List<Role>();
-            Command cmd = new Command("Login", true);
-            cmd.AddParameter("userId", userId);
-            IEnumerable<Role> roles = ExecuteReader<Role>(cmd);
-            return roles;
+
+            cmd.AddParameter("email", email);
+            cmd.AddParameter("idRole", idRole);
+
+            return ExecuteNonQuery(cmd) == 1;
         }
         /// <summary>
         /// Ajoute le role Owner a l user 

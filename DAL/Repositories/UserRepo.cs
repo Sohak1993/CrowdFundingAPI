@@ -68,6 +68,9 @@ namespace DAL.Repositories
         }
 
         public bool DeleteUser(int id)
+        {
+            throw new NotImplementedException();
+        }
         bool IUserService.swapUserStatus(int id)
         {
             throw new NotImplementedException();
