@@ -58,7 +58,7 @@ namespace BLL.Services
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public void swapUserStatus(int id)
+        public bool swapUserStatus(int id)
         {
             IEnumerable<Role> roles = _userRoleRepo.GetRolesByUser(id).Select(role => MapModel<Role, DALM.Role>(role));
             foreach (Role role in roles)
@@ -66,6 +66,7 @@ namespace BLL.Services
                 if (role.Name == "Owner") _userRoleRepo.addOwner(id);
                 else _userRoleRepo.removeOwner(id); 
             }
+            return false;
         }
 
         public bool UpdateUser(int idUser, string nickname, string email, DateOnly birthdate)
