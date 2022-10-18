@@ -19,7 +19,7 @@ namespace BLL.Models
 		public DateTime BeginDate { get; set; }
 		//[JsonConverter(typeof(DateOnlyJsonConverter))]
 		public DateTime EndDate { get; set; }
-		public int IdUser { get; set; }
+		//public int IdUser { get; set; }
 		public bool IsValidate { get; set; }
 	}
 }

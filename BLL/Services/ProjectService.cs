@@ -8,10 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToolBox.Mapper;
+using DALM = DAL.Models;
 
 namespace BLL.Services
 {
-    public class ProjectService : IProjectService
+    public class ProjectService : ObjectMapper, IProjectService
     {
         private readonly IProjectRepo _projectRepo;
 
@@ -22,7 +24,7 @@ namespace BLL.Services
 
         public void CreateProject(Project p)
         {
-            _projectRepo.CreateProject(p.ToDal());
+            _projectRepo.CreateProject(MapModel<DALM.Project,Project>(p));
         }
 
         public void Delete(int id)
@@ -32,18 +34,18 @@ namespace BLL.Services
 
         public IEnumerable<Project> GetAll()
         {
-
-            return _projectRepo.GetAll().Select(element => element.ToBll());
+            return _projectRepo.GetAll().Select(elem => MapModel<Project, DALM.Project>(elem));
+            
         }
 
         public Project GetById(int id)
         {
-            return _projectRepo.GetById(id).ToBll();
+            return MapModel<Project, DALM.Project>(_projectRepo.GetById(id));
         }
 
         public void Update(Project p)
         {
-            _projectRepo.Update(p.ToDal());
+            _projectRepo.Update(MapModel<DALM.Project, Project>(p));
         }
     }
 }
