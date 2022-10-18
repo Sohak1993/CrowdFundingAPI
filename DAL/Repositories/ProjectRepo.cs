@@ -5,17 +5,16 @@ using DAL.Models;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using ToolBox;
+using ToolBox.Models;
 
 namespace DAL.Repositories
 {
-	public class ProjectRepo : IProjectRepo 
+	public class ProjectRepo : Connection, IProjectRepo 
 	{
 		private string _connectionString;
 
-        public ProjectRepo(IConfiguration config)
-        {
-          _connectionString = config.GetConnectionString("default");
-        }
+        public ProjectRepo(IConfiguration config) : base(config){}
         protected Project Converter(IDataReader reader)
         {
             return new Project
@@ -37,6 +36,7 @@ namespace DAL.Repositories
 
         public void Delete(int id)
         {
+
             using (SqlConnection cnx = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = cnx.CreateCommand())
@@ -52,21 +52,8 @@ namespace DAL.Repositories
 
         public IEnumerable<Project> GetAll()
         {
-            using (SqlConnection cnx = new SqlConnection(_connectionString))
-            {
-                using (SqlCommand cmd = cnx.CreateCommand())
-                {
-                    cmd.CommandText = "SELECT * FROM Project";
-                    cnx.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            yield return Converter(reader);
-                        }
-                    }
-                }
-            }
+            Command cmd = new Command("SELECT * FROM Project");
+            return ExecuteReader<Project>(cmd);
         }
 
         public Project GetById(int id)

@@ -52,7 +52,7 @@ namespace CrowdFundingAPI.Controllers
             return Ok(_LocalUserService.UpdateUser(user.Id, user.NickName, user.Email, user.BirthDate));
         }
 
-        [HttpGet("getOne")]
+        [HttpGet("{idUser}")]
         public IActionResult GetOne(int idUser)
         {
             return Ok(_LocalUserService.GetOne(idUser));
