@@ -32,15 +32,11 @@ namespace CrowdFundingAPI.Controllers
         {
             return Ok(_LocalUserService.RegisterUser(user.NickName, user.Email, user.Password, user.BirthDate, user.idRole));
         }
-        [HttpPost("downgradeUser")]
-        public IActionResult downgradeUser()
+
+        [HttpPost("swapUserStatus")]
+        public IActionResult swapUserStatus(int id)
         {
-            return null;
-        }
-        [HttpPost("upgradeUser")]
-        public IActionResult upgradeUser()
-        {
-         return null;
+            return Ok(_LocalUserService.swapUserStatus(id));
         }
     }
 }
