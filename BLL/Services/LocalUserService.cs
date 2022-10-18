@@ -37,7 +37,7 @@ namespace BLL.Services
             user.Roles = _userRoleRepo.GetRolesByUser(user.Id).Select(role => 
                 MapModel<Role, DALM.Role>(role)
             );
-        return user;
+            return user;
         }
 
         public bool RegisterUser(string nickname, string email, string password, DateOnly birthdate)
