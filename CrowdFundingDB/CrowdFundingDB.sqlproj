@@ -77,11 +77,11 @@
     <Build Include="StoredProcedure\User\UserRoleRegister.sql" />
     <Build Include="Views\User\V_Users.sql" />
     <Build Include="StoredProcedure\User\UpdateUser.sql" />
-    <None Include="StoredProcedure\User\UserRemoveOwner.sql" />
+    <None Include="StoredProcedure\User\UserRoleRemoveOwner.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CrowdFundingDB.publish.xml" />
-    <None Include="StoredProcedure\User\UserAddOwner.sql" />
+    <None Include="StoredProcedure\User\UserRoleAddOwner.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

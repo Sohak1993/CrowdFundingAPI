@@ -25,6 +25,6 @@ SET @idUser = 1
 SET @idRole = 3
 
 EXEC RegisterUser 'Sohak', @email, 'test1223', @date
-EXEC UserRoleRegister @idUser
+EXEC UserRoleRegister @idUser,@email
 
 

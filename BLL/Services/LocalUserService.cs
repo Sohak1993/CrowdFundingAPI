@@ -53,21 +53,28 @@ namespace BLL.Services
             return (isRegister && isRegisterRole);
         }
         /// <summary>
-        /// Passer du status de baker a owner et inversement
+        ///  Passer du status de baker a owner et inversement
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
         public bool swapUserStatus(int id)
-        {
-            IEnumerable<Role> roles = _userRoleRepo.GetRolesByUser(id).Select(role => MapModel<Role, DALM.Role>(role));
-            foreach (Role role in roles)
             {
-                if (role.Name == "Owner") _userRoleRepo.addOwner(id);
-                else _userRoleRepo.removeOwner(id); 
-            }
+            bool is_owner = false;
+            IEnumerable<Role> roles = _userRoleRepo.GetRolesByUser(id).Select(role => MapModel<Role, DALM.Role>(role));
+            foreach (Role role in roles) if (role.Name == "Owner") is_owner = true;
+            Console.WriteLine("Owner existe ? : "+is_owner);
+            if (is_owner)
+                {
+                _userRoleRepo.removeOwner(id);
+                Console.WriteLine("Owner supprimer");
+                }
+            else 
+                {
+                _userRoleRepo.addOwner(id);
+                Console.WriteLine("owner ajouter");
+                }
             return false;
-        }
+            }
 
         public bool UpdateUser(int idUser, string nickname, string email, DateOnly birthdate)
         {
