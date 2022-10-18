@@ -22,7 +22,7 @@ namespace DAL.Repositories
 
         public IEnumerable<Role> GetRolesByUser(int userId)
         {
-            Command cmd = new Command("Login", true);
+            Command cmd = new Command("Role_User", true);
             cmd.AddParameter("userId", userId);
 
             return ExecuteReader<Role>(cmd);    
