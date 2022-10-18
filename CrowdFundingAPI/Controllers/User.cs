@@ -1,7 +1,9 @@
 ﻿using BLL.Interface;
-using CrowdFundingAPI.Models.User;
+using CrowdFundingAPI.Models;
+using DemoAPI.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using BLLM = BLL.Models;
 
 namespace CrowdFundingAPI.Controllers
 {
@@ -9,10 +11,12 @@ namespace CrowdFundingAPI.Controllers
     [ApiController]
     public class User : ControllerBase
     {
+        private readonly TokenManager _tokenManager;
         private readonly ILocalUserService _LocalUserService;
-        public User(ILocalUserService service)
+        public User(ILocalUserService service, TokenManager tokenManager)
         {
             _LocalUserService = service;
+            _tokenManager = tokenManager;
         }
 
         [HttpGet]
@@ -24,7 +28,15 @@ namespace CrowdFundingAPI.Controllers
         [HttpPost("login")]
         public IActionResult Login(LoginForm form)
         {
-            return Ok(_LocalUserService.Login(form.email, form.password));
+            BLLM.User u = _LocalUserService.Login(form.email, form.password);
+            ConnectedUser cu = new ConnectedUser
+            {
+                Id = u.Id,
+                NickName = u.NickName,
+                Token = _tokenManager.GenerateToken(u)
+            };
+
+            return Ok(cu);
         }
 
         [HttpPost("register")]
