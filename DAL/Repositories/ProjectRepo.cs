@@ -25,8 +25,8 @@ namespace DAL.Repositories
                 Title = reader["Title"].ToString(),
                 Description = reader["Description"].ToString(),
                 Goal = (int)reader["Goal"],
-                BeginDate = (DateOnly)reader["BeginDate"],
-                EndDate = (DateOnly)reader["EndDate"],
+                BeginDate = (DateTime)reader["BeginDate"],
+                EndDate = (DateTime)reader["EndDate"],
                 IdUser = (int)reader["IdUser"],
                 IsValidate = (bool)reader["IsValidate"]
 
@@ -99,7 +99,7 @@ namespace DAL.Repositories
             {
                 using (SqlCommand cmd = cnx.CreateCommand())
                 {
-                    cmd.CommandText = "UPDATE Project SET IdOwner = @IdOwner, Title = @title, Description = @Description, Goal = @Goal, BegindDate = @BeginDate, EndDate = @EndDate, IdUser = @IdUser, IsValidate = @IsValidate " +
+                    cmd.CommandText = "UPDATE Project SET IdOwner = @IdOwner, Title = @title, Description = @Description, Goal = @Goal, BeginDate = CONVERT(date,@BeginDate), EndDate = CONVERT(date,@EndDate), IdUser = @IdUser, IsValidate = @IsValidate " +
                         " WHERE Id = @id";
                     cmd.Parameters.AddWithValue("IdOwner", p.IdOwner);
                     cmd.Parameters.AddWithValue("Title", p.Title);
@@ -125,7 +125,7 @@ namespace DAL.Repositories
                 using (SqlCommand cmd = cnx.CreateCommand())
                 {
                     cmd.CommandText = "INSERT INTO Project (IdOwner, Title, Description, Goal, BeginDate, EndDate, IdUser, IsValidate) " +
-                        "VALUES (@IdOwner, @Title, @Description, @Goal, CONVERT(date,@BeginDate,111), CONVERT(date,@EndDate,111), @IdUser, @IsValidate)";
+                        "VALUES (@IdOwner, @Title, @Description, @Goal, CONVERT(date,@BeginDate), CONVERT(date,@EndDate), @IdUser, @IsValidate)";
                     cmd.Parameters.AddWithValue("IdOwner", p.IdOwner);
                     cmd.Parameters.AddWithValue("Title", p.Title);
                     cmd.Parameters.AddWithValue("Description", p.Description);

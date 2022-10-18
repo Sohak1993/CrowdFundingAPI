@@ -8,7 +8,7 @@
 	BeginDate DATE NOT NULL,
 	EndDate DATE NOT NULL,
 	IdUser INT NOT NULL,
-	isValidate BINARY DEFAULT 0 NOT NULL,
+	isValidate BIT DEFAULT 0 NOT NULL,
    
    FOREIGN KEY(IdUser) REFERENCES [User]([Id])
 
