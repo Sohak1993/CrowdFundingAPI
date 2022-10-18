@@ -27,7 +27,7 @@ namespace DAL.Repositories
                 Goal = (int)reader["Goal"],
                 BeginDate = (DateTime)reader["BeginDate"],
                 EndDate = (DateTime)reader["EndDate"],
-                IdUser = (int)reader["IdUser"],
+                //IdUser = (int)reader["IdUser"],
                 IsValidate = (bool)reader["IsValidate"]
 
             };
@@ -99,7 +99,7 @@ namespace DAL.Repositories
             {
                 using (SqlCommand cmd = cnx.CreateCommand())
                 {
-                    cmd.CommandText = "UPDATE Project SET IdOwner = @IdOwner, Title = @title, Description = @Description, Goal = @Goal, BeginDate = CONVERT(date,@BeginDate), EndDate = CONVERT(date,@EndDate), IdUser = @IdUser, IsValidate = @IsValidate " +
+                    cmd.CommandText = "UPDATE Project SET IdOwner = @IdOwner, Title = @title, Description = @Description, Goal = @Goal, BeginDate = CONVERT(date,@BeginDate), EndDate = CONVERT(date,@EndDate), IsValidate = @IsValidate " +
                         " WHERE Id = @id";
                     cmd.Parameters.AddWithValue("IdOwner", p.IdOwner);
                     cmd.Parameters.AddWithValue("Title", p.Title);
@@ -107,7 +107,7 @@ namespace DAL.Repositories
                     cmd.Parameters.AddWithValue("Goal", p.Goal);
                     cmd.Parameters.AddWithValue("BeginDate", p.BeginDate);
                     cmd.Parameters.AddWithValue("EndDate", p.EndDate);
-                    cmd.Parameters.AddWithValue("IdUser", p.IdUser);
+                    //cmd.Parameters.AddWithValue("IdUser", p.IdUser);
                     cmd.Parameters.AddWithValue("IsValidate", p.IsValidate);
                     cmd.Parameters.AddWithValue("id", p.Id);
 
@@ -124,15 +124,15 @@ namespace DAL.Repositories
             {
                 using (SqlCommand cmd = cnx.CreateCommand())
                 {
-                    cmd.CommandText = "INSERT INTO Project (IdOwner, Title, Description, Goal, BeginDate, EndDate, IdUser, IsValidate) " +
-                        "VALUES (@IdOwner, @Title, @Description, @Goal, CONVERT(date,@BeginDate), CONVERT(date,@EndDate), @IdUser, @IsValidate)";
+                    cmd.CommandText = "INSERT INTO Project (IdOwner, Title, Description, Goal, BeginDate, EndDate, IsValidate) " +
+                        "VALUES (@IdOwner, @Title, @Description, @Goal, CONVERT(date,@BeginDate), CONVERT(date,@EndDate), @IsValidate)";
                     cmd.Parameters.AddWithValue("IdOwner", p.IdOwner);
                     cmd.Parameters.AddWithValue("Title", p.Title);
                     cmd.Parameters.AddWithValue("Description", p.Description);
                     cmd.Parameters.AddWithValue("Goal", p.Goal);
                     cmd.Parameters.AddWithValue("BeginDate", p.BeginDate);
                     cmd.Parameters.AddWithValue("EndDate", p.EndDate);
-                    cmd.Parameters.AddWithValue("IdUser", p.IdUser);
+                    //cmd.Parameters.AddWithValue("IdUser", p.IdUser);
                     cmd.Parameters.AddWithValue("IsValidate", p.IsValidate);
 
                     cnx.Open();

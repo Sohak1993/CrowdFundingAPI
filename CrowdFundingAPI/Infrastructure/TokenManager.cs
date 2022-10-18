@@ -24,12 +24,22 @@ namespace DemoAPI.Infrastructure
             //Création de la signature du token
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secret));
             SigningCredentials credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);
-
+            
+            bool isAdmin = false;
+            /*for(int i = 0; i < user.Roles.Count(); i++)
+            {
+                if(user.Roles[i].Name == "Admin") isAdmin = true;
+            }*/
+            foreach(Role r in user.Roles)
+            {
+                if(r.Name == "Admin") isAdmin = true;
+            
+            }
             
             //Création du payload / Claims
             Claim[] myclaims = new Claim[]
             {
-                new Claim(ClaimTypes.Role, user.IsAdmin ? "Admin" : "User"),
+                new Claim(ClaimTypes.Role, isAdmin ? "Admin" : "User"),
                 new Claim("UserId", user.Id.ToString())
             };
 
