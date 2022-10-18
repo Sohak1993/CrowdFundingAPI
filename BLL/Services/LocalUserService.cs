@@ -74,5 +74,10 @@ namespace BLL.Services
             bool isRegister = _userRepo.UpdateUser(idUser, nickname, email, birthdate);
             return isRegister;
         }
+
+        public bool DeleteUser(int idUser)
+        {
+            return false; 
+        }
     }
 }

@@ -41,9 +41,21 @@ namespace CrowdFundingAPI.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register(UserForm user)
+        public IActionResult RegisterUser(UserForm user)
         {
             return Ok(_LocalUserService.RegisterUser(user.NickName, user.Email, user.Password, user.BirthDate, user.idRole));
+        }
+
+        [HttpPost("update")]
+        public IActionResult UpdateUser(UserForm user)
+        {
+            return Ok(_LocalUserService.UpdateUser(user.Id, user.NickName, user.Email, user.BirthDate));
+        }
+
+        [HttpGet("getOne")]
+        public IActionResult GetOne(int idUser)
+        {
+            return Ok(_LocalUserService.GetOne(idUser));
         }
 
         [HttpPost("swapUserStatus")]
