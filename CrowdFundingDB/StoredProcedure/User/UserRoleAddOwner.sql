@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[UserAddOwner]
+﻿CREATE PROCEDURE [dbo].[UserRoleAddOwner]
 	
 	@idUser int
 AS
