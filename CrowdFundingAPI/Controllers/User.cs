@@ -1,5 +1,6 @@
 ﻿using BLL.Interface;
 using CrowdFundingAPI.Models;
+using CrowdFundingAPI.Models.User;
 using DemoAPI.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
