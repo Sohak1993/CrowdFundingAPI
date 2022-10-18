@@ -40,5 +40,14 @@ namespace DAL.Repositories
         {
             throw new NotImplementedException();
         }
+        bool swapUserStatus(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IUserService.swapUserStatus(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

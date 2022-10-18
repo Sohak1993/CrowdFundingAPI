@@ -59,5 +59,10 @@ namespace BLL.Services
                 else _userRoleRepo.removeOwner(id); 
             }
         }
+
+        bool ILocalUserService.swapUserStatus(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
