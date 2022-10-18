@@ -71,14 +71,18 @@
     <Build Include="Tables\Step.sql" />
     <Build Include="Tables\User_Role.sql" />
     <Build Include="StoredProcedure\User\GetUser.sql" />
-    <Build Include="Views\User\V_Users.sql" />
     <Build Include="StoredProcedure\User\Login.sql" />
     <Build Include="StoredProcedure\User\Role_User.sql" />
     <Build Include="StoredProcedure\User\UpdateUser.sql" />
     <Build Include="StoredProcedure\User\UserRegister.sql" />
     <Build Include="StoredProcedure\User\UserRoleRegister.sql" />
+    <Build Include="Views\User\V_Users.sql" />
+    <Build Include="StoredProcedure\User\UpdateUser.sql" />
+    <None Include="StoredProcedure\User\UserRoleRemoveOwner.sql" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CrowdFundingDB.publish.xml" />
+    <None Include="StoredProcedure\User\UserRoleAddOwner.sql" />
     <PostDeploy Include="Script.PostDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>

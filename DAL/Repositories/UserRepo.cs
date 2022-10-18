@@ -62,18 +62,10 @@ namespace DAL.Repositories
 
             return ExecuteNonQuery(cmd) == 1;
         }
-        bool swapUserStatus(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool DeleteUser(int id)
         {
             throw new NotImplementedException();
         }
-        bool IUserService.swapUserStatus(int id)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
