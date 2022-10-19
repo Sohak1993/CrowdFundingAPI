@@ -351,7 +351,7 @@ ASALocalRun/
 .localhistory/
 
 # Appsettings JSON
-.appsetings.json
+.appsettings.json
 
 # BeatPulse healthcheck temp database
 healthchecksdb
