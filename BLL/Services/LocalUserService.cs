@@ -65,6 +65,12 @@ namespace BLL.Services
             bool isRegisterRole = _userRoleRepo.RegisterRoleUser(email, idRole);
             return (isRegister && isRegisterRole);
         }
+
+        public bool UpdateUser(int idUser, string nickname, string email, DateOnly birthdate)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///  Passer du status de baker a owner et inversement
         /// </summary>

@@ -12,8 +12,6 @@ namespace DAL.Interface
         public IEnumerable<Role> GetRolesByUser(int userId);
         public bool UserRoleAddOwner(int id);
         public bool UserRoleRemoveOwner(int id);
-        public bool addOwner(int id);
-        public bool removeOwner(int id);
         bool RegisterRoleUser(string email, int idRole);
     }
 }
