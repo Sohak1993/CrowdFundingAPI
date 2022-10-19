@@ -30,34 +30,24 @@ namespace DAL.Repositories
         /// <summary>
         /// Ajoute le role Owner a l user 
         /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public bool addOwner(int id)
+        public bool UserRoleAddOwner(int id)
         {
             Command cmd = new Command("insert into User_Role (idRole,IdUser)values (3,@idUser);");
             cmd.AddParameter("idUser", id);
-
-
-            /*
-            //cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText ="insert into User_Role (idRole IdUser)values (3,@idUser);";
-                cmd.Parameters.AddWithValue("idUser", id);
-                cnx.Open();
-                cmd.ExecuteNonQuery
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    return GetList<Role>(reader);
-                }
-              */
-            return false;
+            return true;
         }
         /// <summary>
         /// Retire le role owner a l user 
         /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public bool removeOwner(int id)
+        public bool UserRoleRemoveOwner(int id)
         {
-
-            return false;
+            Command cmd = new Command("delete from User_Role where IdUser=@idUser and IdRole=3;");
+            cmd.AddParameter("idUser", id);
+            return true;
         }
     }
 }

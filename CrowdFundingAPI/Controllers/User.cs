@@ -33,10 +33,10 @@ namespace CrowdFundingAPI.Controllers
             return Ok(_LocalUserService.RegisterUser(user.NickName, user.Email, user.Password, user.BirthDate));
         }
 
-        [HttpPost("swapUserStatus")]
-        public IActionResult swapUserStatus(int id)
+        [HttpPost("UserSwapStatus")]
+        public IActionResult UserSwapStatus(int id)
         {
-            return Ok(_LocalUserService.swapUserStatus(id));
+            return Ok(_LocalUserService.UserSwapStatus(id));
         }
     }
 }
