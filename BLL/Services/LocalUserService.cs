@@ -24,7 +24,7 @@ namespace BLL.Services
             _userRoleRepo = userRoleRepo;
         }
 
-        public List<User> GetAll()
+        public IEnumerable<User> GetAll()
         {
             IEnumerable<User> users = _userRepo.GetAll()
                 .Select(user => MapModel<User, DALM.User>(user)
