@@ -1,7 +1,10 @@
 ﻿using BLL.Interface;
 using CrowdFundingAPI.Models;
+using CrowdFundingAPI.Models.User;
+using DemoAPI.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using BLLM = BLL.Models;
 
 namespace CrowdFundingAPI.Controllers
 {
@@ -9,10 +12,12 @@ namespace CrowdFundingAPI.Controllers
     [ApiController]
     public class User : ControllerBase
     {
+        private readonly TokenManager _tokenManager;
         private readonly ILocalUserService _LocalUserService;
-        public User(ILocalUserService service)
+        public User(ILocalUserService service, TokenManager tokenManager)
         {
             _LocalUserService = service;
+            _tokenManager = tokenManager;
         }
 
         [HttpGet]
@@ -24,13 +29,33 @@ namespace CrowdFundingAPI.Controllers
         [HttpPost("login")]
         public IActionResult Login(LoginForm form)
         {
-            return Ok(_LocalUserService.Login(form.email, form.password));
+            BLLM.User u = _LocalUserService.Login(form.email, form.password);
+            ConnectedUser cu = new ConnectedUser
+            {
+                Id = u.Id,
+                NickName = u.NickName,
+                Token = _tokenManager.GenerateToken(u)
+            };
+
+            return Ok(cu);
         }
 
         [HttpPost("register")]
-        public IActionResult Register(UserForm user)
+        public IActionResult RegisterUser(UserForm user)
         {
-            return Ok(_LocalUserService.RegisterUser(user.NickName, user.Email, user.Password, user.BirthDate));
+            return Ok(_LocalUserService.RegisterUser(user.NickName, user.Email, user.Password, user.BirthDate, user.idRole));
+        }
+
+        [HttpPost("update")]
+        public IActionResult UpdateUser(UserForm user)
+        {
+            return Ok(_LocalUserService.UpdateUser(user.Id, user.NickName, user.Email, user.BirthDate));
+        }
+
+        [HttpGet("getOne")]
+        public IActionResult GetOne(int idUser)
+        {
+            return Ok(_LocalUserService.GetOne(idUser));
         }
 
         [HttpPost("UserSwapStatus")]

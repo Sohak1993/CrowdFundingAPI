@@ -16,16 +16,26 @@ namespace DAL.Repositories
 {
     public class UserRoleRepo : Connection, IUserRoleService
     {
-        private readonly string _connectionString;
-        public UserRoleRepo(IConfiguration config) : base(config) { }
-       
+        public UserRoleRepo(IConfiguration config) : base(config)
+        {        
+        }
+
         public IEnumerable<Role> GetRolesByUser(int userId)
         {
-            List<Role> Roles = new List<Role>();
-            Command cmd = new Command("Login", true);
+            Command cmd = new Command("Role_User", true);
             cmd.AddParameter("userId", userId);
-            IEnumerable<Role> roles = ExecuteReader<Role>(cmd);
-            return roles;
+
+            return ExecuteReader<Role>(cmd);    
+        }
+
+        public bool RegisterRoleUser(string email, int idRole)
+        {
+            Command cmd = new Command("UserRoleRegister", true);
+
+            cmd.AddParameter("email", email);
+            cmd.AddParameter("idRole", idRole);
+
+            return ExecuteNonQuery(cmd) == 1;
         }
         /// <summary>
         /// Ajoute le role Owner a l user 
@@ -39,7 +49,7 @@ namespace DAL.Repositories
             return true;
         }
         /// <summary>
-        /// Retire le role owner a l user 
+        /// Retirer le role de owner
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

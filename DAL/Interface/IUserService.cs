@@ -13,5 +13,9 @@ namespace DAL.Interface
         User Login(string email, string password);
         bool RegisterUser(string nickname, string email, string password, DateOnly birthdate);
        
+        //bool swapUserStatus(int id);
+        bool UpdateUser(int id, string nickName, string email, DateOnly birthdate);
+        public User GetOne(int idUser);
+        public bool DeleteUser(int id);
     }
 }

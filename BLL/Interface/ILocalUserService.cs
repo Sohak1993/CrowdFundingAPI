@@ -13,5 +13,9 @@ namespace BLL.Interface
         User Login(string email, string password);
         bool RegisterUser(string nickname, string email, string password, DateOnly birthdate);
         bool UserSwapStatus(int id);
+        bool swapUserStatus(int id);
+        bool RegisterUser(string nickname, string email, string password, DateOnly birthdate, int idRole);
+        bool UpdateUser(int idUser, string nickname, string email, DateOnly birthdate);
+        public User GetOne(int idUser);
     }
 }

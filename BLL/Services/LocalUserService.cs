@@ -26,8 +26,14 @@ namespace BLL.Services
 
         public IEnumerable<User> GetAll()
         {
-            //return _userRepo.GetAll().Select(x => x.ToBll());
-            return null;
+            return _userRepo.GetAll().Select(user => 
+                MapModel<User, DALM.User>(user)
+            ); 
+        }
+
+        public User GetOne(int idUser)
+        {
+            return MapModel<User, DALM.User>(_userRepo.GetOne(idUser));
         }
 
         public User Login(string email, string password)
@@ -37,15 +43,17 @@ namespace BLL.Services
             user.Roles = _userRoleRepo.GetRolesByUser(user.Id).Select(role => 
                 MapModel<Role, DALM.Role>(role)
             );
-        return user;
+            return user;
         }
 
-        public bool RegisterUser(string nickname, string email, string password, DateOnly birthdate)
+        public bool RegisterUser(string nickname, string email, string password, DateOnly birthdate, int idRole)
         {
-            return _userRepo.RegisterUser(nickname, email, password, birthdate);
+            bool isRegister = _userRepo.RegisterUser(nickname, email, password, birthdate);
+            bool isRegisterRole = _userRoleRepo.RegisterRoleUser(email, idRole);
+            return (isRegister && isRegisterRole);
         }
         /// <summary>
-        /// Passer du status de baker a owner et inversement
+        ///  Passer du status de baker a owner et inversement
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

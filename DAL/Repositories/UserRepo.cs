@@ -16,13 +16,20 @@ namespace DAL.Repositories
 {
     public class UserRepo : Connection, IUserService
     {
-        public UserRepo(IConfiguration config) : base(config)
-        {
+        public UserRepo(IConfiguration config) : base(config){}
 
-        }
         public IEnumerable<User> GetAll()
         {
-            throw new NotImplementedException();
+            Command cmd = new Command("SELECT * FROM V_Users");
+            return ExecuteReader<User>(cmd);
+        }
+
+        public User GetOne(int idUser)
+        {
+            Command cmd = new Command("GetUser", true);
+            cmd.AddParameter("idUser", idUser);
+
+            return ExecuteReader<User>(cmd).First();
         }
 
         public User Login(string email, string password)
@@ -31,14 +38,34 @@ namespace DAL.Repositories
             cmd.AddParameter("email", email);
             cmd.AddParameter("password", password);
 
-            IEnumerable<User> users = ExecuteReader<User>(cmd);
-
-            return users.First();
+            return ExecuteReader<User>(cmd).First();
         }
 
-        public bool RegisterUser(string nickname, string email, string password, DateOnly birthdate)
+        public bool RegisterUser(string nickName, string email, string password, DateOnly birthdate)
+        {
+            Command cmd = new Command("UserRegister", true);
+            cmd.AddParameter("nickName", nickName);
+            cmd.AddParameter("email", email);
+            cmd.AddParameter("password", password);
+            cmd.AddParameter("birthdate", birthdate);
+
+            return ExecuteNonQuery(cmd) == 1;
+        }
+
+        public bool UpdateUser(int id, string nickName, string email, DateOnly birthdate)
+        {
+            Command cmd = new Command("UpdateUser", true);
+            cmd.AddParameter("id", id);
+            cmd.AddParameter("nickName", nickName);
+            cmd.AddParameter("email", email);
+            cmd.AddParameter("birthdate", birthdate);
+
+            return ExecuteNonQuery(cmd) == 1;
+        }
+        public bool DeleteUser(int id)
         {
             throw new NotImplementedException();
         }
+       
     }
 }
