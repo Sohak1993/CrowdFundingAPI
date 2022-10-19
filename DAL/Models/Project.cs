@@ -15,7 +15,7 @@ namespace DAL.Models
 	public int Goal { get; set; }
 	public DateTime BeginDate { get; set; }
 	public DateTime EndDate { get; set; }
-	public int IdUser { get; set; }
+	//public int IdUser { get; set; }
 	public bool IsValidate { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace BLL.Mappers
                 Goal = p.Goal,
                 BeginDate = p.BeginDate,
                 EndDate = p.EndDate,
-                IdUser = p.IdUser,
+                //IdUser = p.IdUser,
                 IsValidate = p.IsValidate
             };
         }
@@ -38,7 +38,7 @@ namespace BLL.Mappers
                 Goal = p.Goal,
                 BeginDate = p.BeginDate,
                 EndDate = p.EndDate,
-                IdUser = p.IdUser,
+                //IdUser = p.IdUser,
                 IsValidate = p.IsValidate
             };
         }
