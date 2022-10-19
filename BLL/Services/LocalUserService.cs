@@ -24,27 +24,30 @@ namespace BLL.Services
             _userRoleRepo = userRoleRepo;
         }
 
-        public IEnumerable<User> GetAll()
+        public List<User> GetAll()
         {
             IEnumerable<User> users = _userRepo.GetAll()
                 .Select(user => MapModel<User, DALM.User>(user)
                 );
 
-            users
-                .Select(user => user.Roles = _userRoleRepo.GetRolesByUser(user.Id)
-                .Select(role => MapModel<Role, DALM.Role>(role)
-                ));
+            List<User> mappedUsers = new List<User>();
 
-            return users;
+            foreach (User user in users)
+            {
+                user.Roles = _userRoleRepo.GetRolesByUser(user.Id)
+                    .Select(role => MapModel<Role, DALM.Role>(role));
+                mappedUsers.Add(user);
+            }
+
+            return mappedUsers;
         }
 
         public User GetOne(int idUser)
         {
             User user = MapModel<User, DALM.User>(_userRepo.GetOne(idUser));
 
-            user.Roles = user.Roles = _userRoleRepo.GetRolesByUser(user.Id)
-                .Select(role => MapModel<Role, DALM.Role>(role)
-            );
+            user.Roles = _userRoleRepo.GetRolesByUser(user.Id)
+                .Select(role => MapModel<Role, DALM.Role>(role));
 
             return user;
         }
