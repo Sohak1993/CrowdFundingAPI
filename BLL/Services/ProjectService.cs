@@ -17,9 +17,9 @@ namespace BLL.Services
     {
         private readonly IProjectRepo _projectRepo;
 
-        public ProjectService(IProjectRepo movieRepo)
+        public ProjectService(IProjectRepo projectRepo)
         {
-            _projectRepo = movieRepo;
+            _projectRepo = projectRepo;
         }
 
         public void CreateProject(Project p)

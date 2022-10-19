@@ -15,25 +15,7 @@ namespace DAL.Repositories
 		private string _connectionString;
 
         public ProjectRepo(IConfiguration config) : base(config) { }
-        //protected Project Converter(IDataReader reader)
-        //{
-        //    return new Project
-        //    {
-        //        Id = (int)reader["Id"],
-        //        IdOwner = (int) reader["IdOwner"],
-        //        Title = reader["Title"].ToString(),
-        //        Description = reader["Description"].ToString(),
-        //        Goal = (int)reader["Goal"],
-        //        BeginDate = (DateTime)reader["BeginDate"],
-        //        EndDate = (DateTime)reader["EndDate"],
-        //        //IdUser = (int)reader["IdUser"],
-        //        IsValidate = (bool)reader["IsValidate"]
-
-        //    };
-        //}
-
-        
-
+       
         public void Delete(int id)
         {
             Command cmd = new Command("DELETE FROM Project WHERE Id = @id");

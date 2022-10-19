@@ -20,6 +20,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IProjectRepo, ProjectRepo>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 
+builder.Services.AddScoped<IProjectContributorRepo, ProjectContributorRepo>();
+builder.Services.AddScoped<IProjectContributorService, ProjectContributorService>();
+
 builder.Services.AddScoped<IUserService, UserRepo>();
 builder.Services.AddScoped<IUserRoleService, UserRoleRepo>();
 
