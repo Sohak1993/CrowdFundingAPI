@@ -54,7 +54,6 @@ namespace ToolBox
             }
         }
 
-
         private SqlCommand CreateCommand(SqlConnection cnx, Command command)
         {
             SqlCommand cmd = cnx.CreateCommand();

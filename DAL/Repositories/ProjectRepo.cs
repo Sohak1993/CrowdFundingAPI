@@ -15,20 +15,22 @@ namespace DAL.Repositories
 		private string _connectionString;
 
         public ProjectRepo(IConfiguration config) : base(config) { }
-       
         public void Delete(int id)
         {
             Command cmd = new Command("DELETE FROM Project WHERE Id = @id");
             cmd.AddParameter("id", id);
             ExecuteNonQuery(cmd);
         }
-
         public IEnumerable<Project> GetAll()
         {
             Command cmd = new Command("SELECT * FROM Project");
             return ExecuteReader<Project>(cmd);
         }
-
+        public IEnumerable<Project> GetAllNotValidated()
+        {
+            Command cmd = new Command("SELECT * FROM Project where isValidate = 0");
+            return ExecuteReader<Project>(cmd);
+        }
         public Project GetById(int id)
         {
             Command cmd = new Command("SELECT * FROM Project WHERE Id = @id");
@@ -37,7 +39,6 @@ namespace DAL.Repositories
 
 
         }
-
         public void Update(Project p)
         {
             Command cmd = new Command("UPDATE Project SET IdOwner = @IdOwner, Title = @title, Description = @Description, Goal = @Goal, BeginDate = CONVERT(date,@BeginDate), EndDate = CONVERT(date,@EndDate), IsValidate = @IsValidate " +
@@ -54,7 +55,12 @@ namespace DAL.Repositories
             ExecuteNonQuery(cmd);
                 
         }
-
+        public int ValidateProject(int id)
+        {
+            Command cmd = new Command("UPDATE Project SET IsValidate = 1 WHERE Id = @id");
+            cmd.AddParameter("id", id);
+            return ExecuteNonQuery(cmd);
+        }
         public void CreateProject(Project p)
 		{
             Command cmd = new Command("INSERT INTO Project (IdOwner, Title, Description, Goal, BeginDate, EndDate, IsValidate) " +
@@ -70,6 +76,4 @@ namespace DAL.Repositories
             ExecuteNonQuery(cmd);
         }
     }
-
-    
 }

@@ -13,6 +13,8 @@ namespace BLL.Interface
         public void Update(Project p);
         public Project GetById(int id);
         public IEnumerable<Project> GetAll();
+        public IEnumerable<Project> GetAllNotValidated();
+        public int ValidateProject(int id);
         public void Delete(int id);
     }
 }
