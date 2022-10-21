@@ -60,6 +60,8 @@
     <Folder Include="StoredProcedure" />
     <Folder Include="Triggers" />
     <Folder Include="Views" />
+    <Folder Include="StoredProcedure\User" />
+    <Folder Include="Views\User" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />
@@ -68,13 +70,18 @@
     <Build Include="Tables\Role.sql" />
     <Build Include="Tables\Step.sql" />
     <Build Include="Tables\User_Role.sql" />
-    <Build Include="StoredProcedure\Login.sql" />
-    <Build Include="StoredProcedure\Role_User.sql" />
-    <Build Include="StoredProcedure\UserRegister.sql" />
-    <Build Include="StoredProcedure\UserRoleRegister.sql" />
+    <Build Include="StoredProcedure\User\GetUser.sql" />
+    <Build Include="StoredProcedure\User\Login.sql" />
+    <Build Include="StoredProcedure\User\Role_User.sql" />
+    <Build Include="StoredProcedure\User\RegisterUser.sql" />
+    <Build Include="StoredProcedure\User\UserRoleRegister.sql" />
+    <Build Include="Views\User\V_Users.sql" />
+    <Build Include="StoredProcedure\User\UpdateUser.sql" />
+    <None Include="StoredProcedure\User\UserRoleRemoveOwner.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CrowdFundingDB.publish.xml" />
+    <None Include="StoredProcedure\User\UserRoleAddOwner.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

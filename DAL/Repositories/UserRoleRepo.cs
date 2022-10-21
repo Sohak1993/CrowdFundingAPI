@@ -8,36 +8,56 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToolBox;
 using ToolBox.Mapper;
+using ToolBox.Models;
 
 namespace DAL.Repositories
 {
-    public class UserRoleRepo : DataToModel, IUserRoleService
+    public class UserRoleRepo : Connection, IUserRoleService
     {
-        private readonly string _connectionString;
-        public UserRoleRepo(IConfiguration config)
-        {
-            _connectionString = config.GetConnectionString("default");
+        public UserRoleRepo(IConfiguration config) : base(config)
+        {        
         }
+
         public IEnumerable<Role> GetRolesByUser(int userId)
         {
-            List<Role> Roles = new List<Role>();
-            using(SqlConnection cnx = new SqlConnection(_connectionString))
-            {
-                using(SqlCommand cmd = cnx.CreateCommand())
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "Role_User";
+            Command cmd = new Command("Role_User", true);
+            cmd.AddParameter("userId", userId);
 
-                    cmd.Parameters.AddWithValue("userId", userId);
+            return ExecuteReader<Role>(cmd);    
+        }
 
-                    cnx.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        return GetList<Role>(reader);
-                    }
-                }
-            }
+        public bool RegisterRoleUser(string email, int idRole)
+        {
+            Command cmd = new Command("UserRoleRegister", true);
+
+            cmd.AddParameter("email", email);
+            cmd.AddParameter("idRole", idRole);
+
+            return ExecuteNonQuery(cmd) == 1;
+        }
+        /// <summary>
+        /// Ajoute le role Owner a l user 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool UserRoleAddOwner(int id)
+        {
+            Command cmd = new Command("insert into User_Role (idRole,IdUser)values (3,@idUser);");
+            cmd.AddParameter("idUser", id);
+            return ExecuteNonQuery(cmd) == 1;
+        }
+        /// <summary>
+        /// Retirer le role de owner
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool UserRoleRemoveOwner(int id)
+        {
+            Command cmd = new Command("delete from User_Role where IdUser=@idUser and IdRole=3;");
+            cmd.AddParameter("idUser", id);
+            return ExecuteNonQuery(cmd) == 1;
         }
     }
 }

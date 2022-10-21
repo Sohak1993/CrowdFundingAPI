@@ -1,4 +1,4 @@
-﻿namespace CrowdFundingAPI.Models
+﻿namespace CrowdFundingAPI.Models.User
 {
     public class LoginForm
     {

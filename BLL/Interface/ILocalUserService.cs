@@ -11,7 +11,9 @@ namespace BLL.Interface
     {
         IEnumerable<User> GetAll();
         User Login(string email, string password);
-        bool RegisterUser(string nickname, string email, string password, DateOnly birthdate);
-        bool UpdateUser(int id);
+        bool UserSwapStatus(int id);
+        bool RegisterUser(string nickname, string email, string password, DateOnly birthdate, int idRole);
+        bool UpdateUser(int idUser, string nickname, string email, DateOnly birthdate);
+        public User GetOne(int idUser);
     }
 }

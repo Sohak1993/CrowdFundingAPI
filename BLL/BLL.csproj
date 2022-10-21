@@ -7,14 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Models\" />
     <Folder Include="Mappers\" />
-    <Folder Include="Interface\" />
     <ProjectReference Include="..\DAL\DAL.csproj" />
-    <Folder Include="Interface\" />
-    <Folder Include="Services\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
