@@ -46,7 +46,7 @@ namespace DAL.Repositories
         {
             Command cmd = new Command("insert into User_Role (idRole,IdUser)values (3,@idUser);");
             cmd.AddParameter("idUser", id);
-            return true;
+            return ExecuteNonQuery(cmd) == 1;
         }
         /// <summary>
         /// Retirer le role de owner
@@ -57,7 +57,7 @@ namespace DAL.Repositories
         {
             Command cmd = new Command("delete from User_Role where IdUser=@idUser and IdRole=3;");
             cmd.AddParameter("idUser", id);
-            return true;
+            return ExecuteNonQuery(cmd) == 1;
         }
     }
 }

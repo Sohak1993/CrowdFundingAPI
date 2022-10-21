@@ -82,11 +82,24 @@ namespace BLL.Services
         /// <exception cref="NotImplementedException"></exception>
         public bool UserSwapStatus(int id)
         {
+
+            bool is_owner = false;
+
             IEnumerable<Role> roles = _userRoleRepo.GetRolesByUser(id).Select(role => MapModel<Role, DALM.Role>(role));
             foreach (Role role in roles)
             {
-                if (role.Name == "Owner") _userRoleRepo.UserRoleAddOwner(id);
-                else _userRoleRepo.UserRoleRemoveOwner(id); 
+                if (role.Name == "Owner")is_owner= true;
+            }
+
+            if (is_owner)
+            {
+                _userRoleRepo.UserRoleRemoveOwner(id);
+                Console.WriteLine("retrait de owner ");
+            }
+            else
+            {
+                _userRoleRepo.UserRoleAddOwner(id);
+                Console.WriteLine("ajoute de owner");
             }
             return true;
         }
