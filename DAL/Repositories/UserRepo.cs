@@ -43,12 +43,12 @@ namespace DAL.Repositories
 
         public bool RegisterUser(string nickName, string email, string password, DateOnly birthdate)
         {
-            Command cmd = new Command("UserRegister", true);
+            Command cmd = new Command("RegisterUser", true);
             cmd.AddParameter("nickName", nickName);
             cmd.AddParameter("email", email);
-            cmd.AddParameter("password", password);
-            cmd.AddParameter("birthdate", birthdate);
-
+            cmd.AddParameter("pwd", password);
+            cmd.AddParameter("birthdate", birthdate.ToString("yyyy-MM-dd"));
+            
             return ExecuteNonQuery(cmd) == 1;
         }
 
@@ -58,7 +58,7 @@ namespace DAL.Repositories
             cmd.AddParameter("id", id);
             cmd.AddParameter("nickName", nickName);
             cmd.AddParameter("email", email);
-            cmd.AddParameter("birthdate", birthdate);
+            cmd.AddParameter("birthdate", birthdate.ToString("yyyy-MM-dd"));
 
             return ExecuteNonQuery(cmd) == 1;
         }

@@ -19,7 +19,7 @@ DECLARE @email VARCHAR(100)
 DECLARE @idUser int
 DECLARE @idRole int
 
-SET @date = CONVERT(date, '1993-09-20')
+SET @date = '1993-09-20'
 SET @email = 'm@m.m'
 SET @idRole = 3
 

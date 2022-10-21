@@ -71,7 +71,7 @@ namespace BLL.Services
 
         public bool UpdateUser(int idUser, string nickname, string email, DateOnly birthdate)
         {
-            throw new NotImplementedException();
+            return _userRepo.UpdateUser(idUser, nickname, email, birthdate);
         }
 
         /// <summary>
