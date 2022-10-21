@@ -13,7 +13,6 @@ namespace DAL.Repositories
 	public class ProjectRepo : Connection, IProjectRepo 
 	{
 		private string _connectionString;
-
         public ProjectRepo(IConfiguration config) : base(config) { }
         public void Delete(int id)
         {
