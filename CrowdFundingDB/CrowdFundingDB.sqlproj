@@ -78,6 +78,7 @@
     <Build Include="Views\User\V_Users.sql" />
     <Build Include="StoredProcedure\User\UpdateUser.sql" />
     <None Include="StoredProcedure\User\UserRoleRemoveOwner.sql" />
+    <Build Include="Tables\Step_User.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CrowdFundingDB.publish.xml" />
