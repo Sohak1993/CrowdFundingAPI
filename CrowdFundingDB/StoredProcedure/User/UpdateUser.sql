@@ -2,7 +2,7 @@
 	@id int,
 	@nickName VARCHAR(50),
 	@email VARCHAR(100),
-	@birthdate DATE
+	@birthdate VARCHAR(100)
 AS
 BEGIN
 	UPDATE [User]

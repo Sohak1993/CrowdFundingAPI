@@ -43,12 +43,13 @@ namespace CrowdFundingAPI.Controllers
         [HttpPost("register")]
         public IActionResult RegisterUser(UserForm user)
         {
-            return Ok(_LocalUserService.RegisterUser(user.NickName, user.Email, user.Password, user.BirthDate, user.idRole));
+            return Ok(_LocalUserService.RegisterUser(user.NickName, user.Email, user.Password, user.BirthDate, user.IdRole));
         }
 
-        [HttpPost("update")]
+        [HttpPut("update")]
         public IActionResult UpdateUser(UserForm user)
         {
+            Console.WriteLine("yo");
             return Ok(_LocalUserService.UpdateUser(user.Id, user.NickName, user.Email, user.BirthDate));
         }
 
