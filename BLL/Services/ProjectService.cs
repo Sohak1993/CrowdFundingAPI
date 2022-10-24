@@ -28,22 +28,27 @@ namespace BLL.Services
         {
             _stepRepo.Create(step.IdProject, step.Amount, step.Reward);
         }
-
         public void CreateProject(Project p)
         {
             _projectRepo.CreateProject(MapModel<DALM.Project,Project>(p));
         }
+        public int ValidateProject(int id)
+        {
+            return _projectRepo.ValidateProject(id);
 
+        }
         public void Delete(int id)
         {
             _projectRepo.Delete(id);
         }
-
         public IEnumerable<Project> GetAll()
         {
             return _projectRepo.GetAll().Select(elem => MapModel<Project, DALM.Project>(elem));
         }
-
+        public IEnumerable<Project> GetAllNotValidated()
+        {
+            return _projectRepo.GetAllNotValidated().Select(elem => MapModel<Project, DALM.Project>(elem));
+        }
         public Project GetById(int id)
         {
             Project project = MapModel<Project, DALM.Project>(_projectRepo.GetById(id));
@@ -52,7 +57,6 @@ namespace BLL.Services
 
             return project;
         }
-
         public void Update(Project p)
         {
             _projectRepo.Update(MapModel<DALM.Project, Project>(p));

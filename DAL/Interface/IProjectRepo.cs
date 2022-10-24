@@ -12,10 +12,9 @@ namespace DAL.Interface
         public void CreateProject(Project p);
         public void Update(Project p);
         public Project GetById(int id);
-        public IEnumerable<Project> GetAll();
+        public IEnumerable<Project> GetAll(); 
+        public IEnumerable<Project> GetAllNotValidated();
         public void Delete(int id);
-
-
-
+        public int ValidateProject(int id);
     }
 }

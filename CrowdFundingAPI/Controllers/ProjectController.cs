@@ -17,13 +17,19 @@ namespace CrowdFundingAPI.Controllers
             _projectService = projectService;
         }
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
             return Ok(_projectService.GetAll());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetAllNotValidated")]
+        public IActionResult GetAllNotValidated()
+        {
+            return Ok(_projectService.GetAllNotValidated());
+        }
+
+        [HttpGet("GetOne/{id}")]
         public IActionResult GetById(int id)
         {
             try
@@ -55,6 +61,14 @@ namespace CrowdFundingAPI.Controllers
             });
             return Ok();
         }
+
+
+        [HttpPut("ValidateProject")]
+        public IActionResult ValidateProject(int id)
+        {
+            return Ok(_projectService.ValidateProject(id));
+        }
+
         [Authorize("Admin")]
         [HttpDelete("{id:int}")]
         public IActionResult Delete(int id)
