@@ -10,5 +10,6 @@ namespace DAL.Interface
     public interface IProjectContributorRepo
     {
         public void AddContribution(ProjectContributor pc);
+        int GetSumOnProjectByUser(int idProject, int idUser);
     }
 }

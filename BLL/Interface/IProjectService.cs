@@ -14,5 +14,6 @@ namespace BLL.Interface
         public Project GetById(int id);
         public IEnumerable<Project> GetAll();
         public void Delete(int id);
+        public void AddStep(Step step);
     }
 }

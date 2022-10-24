@@ -10,7 +10,6 @@
 
 		public DateTime BeginDate { get; set; }
 		public DateTime EndDate { get; set; }
-		public int IdUser { get; set; }
 		public bool IsValidate { get; set; }
 	}
 }

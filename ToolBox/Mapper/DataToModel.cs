@@ -9,7 +9,7 @@ namespace ToolBox.Mapper
 {
     public abstract class DataToModel
     {
-        public virtual List<T> GetList<T>(IDataReader reader)
+        public virtual List<T> GetList<T>(IDataReader reader)where T:new()
         {
             List<T> list = new List<T>();
             while (reader.Read())

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Models
+namespace DAL.Models
 {
-    public class ProjectContributor
+    public class Step
     {
+        public int Id { get; set; }
         public int IdProject { get; set; }
-        public int IdUser { get; set; }
         public int Amount { get; set; }
-        
+        public string Reward { get; set; }
     }
 }

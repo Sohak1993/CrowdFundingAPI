@@ -13,8 +13,6 @@ namespace DAL.Repositories
 {
     public class ProjectContributorRepo : Connection, IProjectContributorRepo
     {
-        private string _connectionString;
-
         public ProjectContributorRepo(IConfiguration config) : base(config) { }
         public void AddContribution(ProjectContributor pc)
         {
@@ -25,6 +23,16 @@ namespace DAL.Repositories
             cmd.AddParameter("Amount", pc.Amount);
 
             ExecuteNonQuery(cmd); 
+        }
+
+        public int GetSumOnProjectByUser(int idProject, int idUser)
+        {
+            Command cmd = new Command("GetSumOnProjectByUser", true);
+
+            cmd.AddParameter("idProject", idProject);
+            cmd.AddParameter("idUser", idUser);
+
+            return ExecuteScalar(cmd);
         }
     }
 }

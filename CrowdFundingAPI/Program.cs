@@ -26,6 +26,9 @@ builder.Services.AddScoped<IProjectContributorService, ProjectContributorService
 builder.Services.AddScoped<IUserService, UserRepo>();
 builder.Services.AddScoped<IUserRoleService, UserRoleRepo>();
 
+builder.Services.AddScoped<IStepRepo, StepRepo>();
+builder.Services.AddScoped<IStepUserRepo, StepUserRepo>();
+
 builder.Services.AddScoped<ILocalUserService, LocalUserService>();
 
 builder.Services.AddScoped<TokenManager>();

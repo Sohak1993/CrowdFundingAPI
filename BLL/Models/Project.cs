@@ -21,5 +21,6 @@ namespace BLL.Models
 		public DateTime EndDate { get; set; }
 		//public int IdUser { get; set; }
 		public bool IsValidate { get; set; }
+		public IEnumerable<Step> Steps { get; set; }
 	}
 }

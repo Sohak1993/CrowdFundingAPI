@@ -10,5 +10,6 @@ namespace BLL.Interface
     public interface IProjectContributorService
     {
         public void AddContribution(ProjectContributor pc);
+
     }
 }

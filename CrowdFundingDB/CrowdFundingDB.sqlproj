@@ -62,6 +62,8 @@
     <Folder Include="Views" />
     <Folder Include="StoredProcedure\User" />
     <Folder Include="Views\User" />
+    <Folder Include="StoredProcedure\Step" />
+    <Folder Include="StoredProcedure\Project_Contributor" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />
@@ -79,6 +81,12 @@
     <Build Include="StoredProcedure\User\UpdateUser.sql" />
     <None Include="StoredProcedure\User\UserRoleRemoveOwner.sql" />
     <Build Include="Tables\Step_User.sql" />
+    <Build Include="StoredProcedure\Step\CreateStep.sql" />
+    <Build Include="StoredProcedure\Step\GetAll.sql" />
+    <Build Include="StoredProcedure\Step\GetOne.sql" />
+    <Build Include="StoredProcedure\Project_Contributor\GetSumOnProjectByUser.sql" />
+    <Build Include="StoredProcedure\Step\GetStepsByProject.sql" />
+    <Build Include="StoredProcedure\Step\GetStepsUserByProjectAndUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CrowdFundingDB.publish.xml" />

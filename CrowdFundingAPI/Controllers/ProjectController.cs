@@ -35,7 +35,6 @@ namespace CrowdFundingAPI.Controllers
             {
                 return BadRequest("Exception non gérée : " + e.Message);
             }
-
         }
 
         [HttpPost]
@@ -68,6 +67,13 @@ namespace CrowdFundingAPI.Controllers
         public IActionResult Update(Project m)
         {
             _projectService.Update(m);
+            return Ok();
+        }
+
+        [HttpPost("addstep")]
+        public IActionResult AddStep(Step step)
+        {
+            _projectService.AddStep(step);
             return Ok();
         }
     }

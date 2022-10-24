@@ -27,7 +27,7 @@ namespace ToolBox
             return connection;
         }
 
-        public virtual IEnumerable<T> ExecuteReader<T> (Command command)
+        public virtual IEnumerable<T> ExecuteReader<T> (Command command) where T : new()
         {
             using (SqlConnection cnx = GetConnection())
             {
@@ -50,6 +50,19 @@ namespace ToolBox
                 {
                     cnx.Open();
                     return cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public virtual int ExecuteScalar(Command command)
+        {
+            using (SqlConnection cnx = GetConnection())
+            {
+                using (SqlCommand cmd = CreateCommand(cnx, command))
+                {
+                    cnx.Open();
+
+                    return int.Parse(cmd.ExecuteScalar().ToString());
                 }
             }
         }

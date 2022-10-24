@@ -6,6 +6,6 @@
 AS
 BEGIN
 	UPDATE [User]
-	SET NickName = @nickName, Email = @email, BirthDate = @birthdate
+	SET NickName = @nickName, Email = @email, BirthDate = CONVERT(date, @birthDate)
 	WHERE Id = @id
 END

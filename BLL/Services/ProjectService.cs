@@ -16,10 +16,17 @@ namespace BLL.Services
     public class ProjectService : ObjectMapper, IProjectService
     {
         private readonly IProjectRepo _projectRepo;
+        private readonly IStepRepo _stepRepo;
 
-        public ProjectService(IProjectRepo projectRepo)
+        public ProjectService(IProjectRepo projectRepo, IStepRepo stepRepo)
         {
             _projectRepo = projectRepo;
+            _stepRepo = stepRepo;
+        }
+
+        public void AddStep(Step step)
+        {
+            _stepRepo.Create(step.IdProject, step.Amount, step.Reward);
         }
 
         public void CreateProject(Project p)
@@ -35,17 +42,21 @@ namespace BLL.Services
         public IEnumerable<Project> GetAll()
         {
             return _projectRepo.GetAll().Select(elem => MapModel<Project, DALM.Project>(elem));
-            
         }
 
         public Project GetById(int id)
         {
-            return MapModel<Project, DALM.Project>(_projectRepo.GetById(id));
+            Project project = MapModel<Project, DALM.Project>(_projectRepo.GetById(id));
+            project.Steps = _stepRepo.GetStepByProject(project.Id)
+                .Select(step => MapModel<Step, DALM.Step>(step));
+
+            return project;
         }
 
         public void Update(Project p)
         {
             _projectRepo.Update(MapModel<DALM.Project, Project>(p));
         }
+
     }
 }
