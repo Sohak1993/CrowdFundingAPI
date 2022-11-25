@@ -54,7 +54,6 @@ namespace ToolBox
             }
         }
 
-<<<<<<< HEAD
         public virtual int ExecuteScalar(Command command)
         {
             using (SqlConnection cnx = GetConnection())
@@ -68,9 +67,6 @@ namespace ToolBox
             }
         }
 
-
-=======
->>>>>>> be8a2bc8a9bd4e21502cde4f56b434c132a33ca3
         private SqlCommand CreateCommand(SqlConnection cnx, Command command)
         {
             SqlCommand cmd = cnx.CreateCommand();

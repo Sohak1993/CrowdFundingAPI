@@ -22,7 +22,7 @@ namespace DAL.Repositories
         }
         public IEnumerable<Project> GetAll()
         {
-            Command cmd = new Command("SELECT * FROM Project");
+            Command cmd = new Command("SELECT * FROM Project WHERE isValidate = 1");
             return ExecuteReader<Project>(cmd);
         }
         public IEnumerable<Project> GetAllNotValidated()

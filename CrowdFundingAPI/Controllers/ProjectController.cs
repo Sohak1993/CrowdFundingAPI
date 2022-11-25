@@ -1,15 +1,16 @@
 ﻿using BLL.Interface;
-using BLL.Models;
+using BLLM = BLL.Models;
 using CrowdFundingAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using CrowdFundingAPI.Models.Project;
 
 namespace CrowdFundingAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjectController : ControllerBase
+    public class ProjectController : ControllerBase 
     {
         private readonly IProjectService _projectService;
         public ProjectController(IProjectService projectService)
@@ -23,6 +24,7 @@ namespace CrowdFundingAPI.Controllers
             return Ok(_projectService.GetAll());
         }
 
+        [Authorize("Admin")]
         [HttpGet("GetAllNotValidated")]
         public IActionResult GetAllNotValidated()
         {
@@ -43,6 +45,7 @@ namespace CrowdFundingAPI.Controllers
             }
         }
 
+        //[Authorize("Owner")]
         [HttpPost]
         public IActionResult CreateProject(ProjectForm p)
         {
@@ -56,13 +59,12 @@ namespace CrowdFundingAPI.Controllers
                 Goal = p.Goal,
                 BeginDate = p.BeginDate,
                 EndDate = p.EndDate,
-                //IdUser = p.IdUser,
                 IsValidate = p.IsValidate
             });
             return Ok();
         }
 
-
+        [Authorize("Admin")]
         [HttpPut("ValidateProject")]
         public IActionResult ValidateProject(int id)
         {
@@ -77,13 +79,24 @@ namespace CrowdFundingAPI.Controllers
             return Ok();
         }
 
-        [HttpPut]
-        public IActionResult Update(Project m)
+        //[Authorize("Owner")]
+        [HttpPut("update")]
+        public IActionResult Update(Project project)
         {
-            _projectService.Update(m);
+            Console.WriteLine("test");
+            _projectService.Update(new BLLM.Project
+            {
+                Id = project.Id,
+
+            });
             return Ok();
         }
 
+
+
+
+
+        [Authorize("Owner")]
         [HttpPost("addstep")]
         public IActionResult AddStep(Step step)
         {

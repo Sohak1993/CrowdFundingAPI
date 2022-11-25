@@ -4,6 +4,7 @@ using CrowdFundingAPI.Models.User;
 using DemoAPI.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using BLLM = BLL.Models;
 
 namespace CrowdFundingAPI.Controllers
@@ -20,6 +21,7 @@ namespace CrowdFundingAPI.Controllers
             _tokenManager = tokenManager;
         }
 
+        [Authorize("Admin")]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -46,6 +48,7 @@ namespace CrowdFundingAPI.Controllers
             return Ok(_LocalUserService.RegisterUser(user.NickName, user.Email, user.Password, user.BirthDate, user.IdRole));
         }
 
+
         [HttpPut("update")]
         public IActionResult UpdateUser(UserForm user)
         {
@@ -53,12 +56,16 @@ namespace CrowdFundingAPI.Controllers
             return Ok(_LocalUserService.UpdateUser(user.Id, user.NickName, user.Email, user.BirthDate));
         }
 
+        [Authorize("Admin")]
         [HttpGet("{idUser}")]
         public IActionResult GetOne(int idUser)
         {
             return Ok(_LocalUserService.GetOne(idUser));
         }
 
+        [Authorize("Owner")]
+        [Authorize("Contributor")]
+        [Authorize("Admin")]
         [HttpPost("UserSwapStatus")]
         public IActionResult UserSwapStatus(int id)
         {
