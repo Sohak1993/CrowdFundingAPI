@@ -38,17 +38,12 @@ namespace DAL.Repositories
 
 
         }
-        public void Update(Project p)
+        public void Update(ProjectUpdate p)
         {
-            Command cmd = new Command("UPDATE Project SET IdOwner = @IdOwner, Title = @title, Description = @Description, Goal = @Goal, BeginDate = CONVERT(date,@BeginDate), EndDate = CONVERT(date,@EndDate), IsValidate = @IsValidate " +
-                        " WHERE Id = @id");
-            cmd.AddParameter("IdOwner", p.IdOwner);
+            Command cmd = new Command("UPDATE Project SET Title = @title, Description = @Description, Goal = @Goal WHERE Id = @id");
             cmd.AddParameter("Title", p.Title);
             cmd.AddParameter("Description", p.Description);
             cmd.AddParameter("Goal", p.Goal);
-            cmd.AddParameter("BeginDate", p.BeginDate);
-            cmd.AddParameter("EndDate", p.EndDate);
-            cmd.AddParameter("IsValidate", p.IsValidate);
             cmd.AddParameter("id", p.Id);
 
             ExecuteNonQuery(cmd);

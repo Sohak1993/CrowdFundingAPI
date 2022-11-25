@@ -46,23 +46,23 @@ namespace CrowdFundingAPI.Controllers
         }
 
         //[Authorize("Owner")]
-        [HttpPost]
-        public IActionResult CreateProject(ProjectForm p)
-        {
-            if (!ModelState.IsValid) return BadRequest();
-            _projectService.CreateProject(new Project
-            {
-                Id = p.Id,
-                IdOwner = p.IdOwner,
-                Title = p.Title,
-                Description = p.Description,
-                Goal = p.Goal,
-                BeginDate = p.BeginDate,
-                EndDate = p.EndDate,
-                IsValidate = p.IsValidate
-            });
-            return Ok();
-        }
+        //[HttpPost]
+        //public IActionResult CreateProject(ProjectForm p)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest();
+        //    _projectService.CreateProject(new Project
+        //    {
+        //        Id = p.Id,
+        //        IdOwner = p.IdOwner,
+        //        Title = p.Title,
+        //        Description = p.Description,
+        //        Goal = p.Goal,
+        //        BeginDate = p.BeginDate,
+        //        EndDate = p.EndDate,
+        //        IsValidate = p.IsValidate
+        //    });
+        //    return Ok();
+        //}
 
         [Authorize("Admin")]
         [HttpPut("ValidateProject")]
@@ -83,11 +83,12 @@ namespace CrowdFundingAPI.Controllers
         [HttpPut("update")]
         public IActionResult Update(Project project)
         {
-            Console.WriteLine("test");
-            _projectService.Update(new BLLM.Project
+            _projectService.Update(new BLLM.ProjectUpdate
             {
                 Id = project.Id,
-
+                Title = project.Title,
+                Description = project.Description,
+                Goal = project.Goal
             });
             return Ok();
         }
@@ -98,7 +99,7 @@ namespace CrowdFundingAPI.Controllers
 
         [Authorize("Owner")]
         [HttpPost("addstep")]
-        public IActionResult AddStep(Step step)
+        public IActionResult AddStep(BLLM.Step step)
         {
             _projectService.AddStep(step);
             return Ok();
