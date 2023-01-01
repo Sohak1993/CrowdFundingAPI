@@ -57,9 +57,9 @@ namespace BLL.Services
 
             return project;
         }
-        public void Update(Project p)
+        public void Update(ProjectUpdate p)
         {
-            _projectRepo.Update(MapModel<DALM.Project, Project>(p));
+            _projectRepo.Update(MapModel<DALM.ProjectUpdate, ProjectUpdate>(p));
         }
 
     }

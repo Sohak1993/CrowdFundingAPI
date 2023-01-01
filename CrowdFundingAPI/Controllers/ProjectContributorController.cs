@@ -4,6 +4,7 @@ using CrowdFundingAPI.Models;
 using CrowdFundingAPI.Models.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using BLLM = BLL.Models;
 
 namespace CrowdFundingAPI.Controllers
@@ -18,7 +19,8 @@ namespace CrowdFundingAPI.Controllers
             _projectContributorService = projectContributorService;
         }
 
-
+        [Authorize("Owner")]
+        [Authorize("Contributor")]
         [HttpPost]
         public IActionResult AddContribution(ProjectContributorForm pc)
         {

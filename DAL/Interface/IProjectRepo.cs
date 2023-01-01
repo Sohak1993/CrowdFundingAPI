@@ -10,7 +10,7 @@ namespace DAL.Interface
     public interface IProjectRepo
     {
         public void CreateProject(Project p);
-        public void Update(Project p);
+        public void Update(ProjectUpdate p);
         public Project GetById(int id);
         public IEnumerable<Project> GetAll(); 
         public IEnumerable<Project> GetAllNotValidated();

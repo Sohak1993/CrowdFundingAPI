@@ -1,15 +1,16 @@
 ﻿using BLL.Interface;
-using BLL.Models;
+using BLLM = BLL.Models;
 using CrowdFundingAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using CrowdFundingAPI.Models.Project;
 
 namespace CrowdFundingAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjectController : ControllerBase
+    public class ProjectController : ControllerBase 
     {
         private readonly IProjectService _projectService;
         public ProjectController(IProjectService projectService)
@@ -23,6 +24,7 @@ namespace CrowdFundingAPI.Controllers
             return Ok(_projectService.GetAll());
         }
 
+        [Authorize("Admin")]
         [HttpGet("GetAllNotValidated")]
         public IActionResult GetAllNotValidated()
         {
@@ -43,26 +45,26 @@ namespace CrowdFundingAPI.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult CreateProject(ProjectForm p)
-        {
-            if (!ModelState.IsValid) return BadRequest();
-            _projectService.CreateProject(new Project
-            {
-                Id = p.Id,
-                IdOwner = p.IdOwner,
-                Title = p.Title,
-                Description = p.Description,
-                Goal = p.Goal,
-                BeginDate = p.BeginDate,
-                EndDate = p.EndDate,
-                //IdUser = p.IdUser,
-                IsValidate = p.IsValidate
-            });
-            return Ok();
-        }
+        //[Authorize("Owner")]
+        //[HttpPost]
+        //public IActionResult CreateProject(ProjectForm p)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest();
+        //    _projectService.CreateProject(new Project
+        //    {
+        //        Id = p.Id,
+        //        IdOwner = p.IdOwner,
+        //        Title = p.Title,
+        //        Description = p.Description,
+        //        Goal = p.Goal,
+        //        BeginDate = p.BeginDate,
+        //        EndDate = p.EndDate,
+        //        IsValidate = p.IsValidate
+        //    });
+        //    return Ok();
+        //}
 
-
+        [Authorize("Admin")]
         [HttpPut("ValidateProject")]
         public IActionResult ValidateProject(int id)
         {
@@ -77,15 +79,27 @@ namespace CrowdFundingAPI.Controllers
             return Ok();
         }
 
-        [HttpPut]
-        public IActionResult Update(Project m)
+        //[Authorize("Owner")]
+        [HttpPut("update")]
+        public IActionResult Update(Project project)
         {
-            _projectService.Update(m);
+            _projectService.Update(new BLLM.ProjectUpdate
+            {
+                Id = project.Id,
+                Title = project.Title,
+                Description = project.Description,
+                Goal = project.Goal
+            });
             return Ok();
         }
 
+
+
+
+
+        [Authorize("Owner")]
         [HttpPost("addstep")]
-        public IActionResult AddStep(Step step)
+        public IActionResult AddStep(BLLM.Step step)
         {
             _projectService.AddStep(step);
             return Ok();

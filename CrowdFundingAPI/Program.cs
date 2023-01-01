@@ -65,6 +65,18 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Auth", policy => policy.RequireAuthenticatedUser());
 });
 
+builder.Services.AddCors(options =>
+{
+
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.AllowAnyMethod();
+                          policy.AllowAnyHeader();
+                          policy.AllowAnyOrigin();
+                      });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -79,5 +91,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseCors(MyAllowSpecificOrigins);
 app.Run();

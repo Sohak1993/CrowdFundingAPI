@@ -37,13 +37,10 @@ namespace BLL.Services
             
             foreach(Step stepProj in project.Steps)
             {
-                Console.WriteLine(totalContrib);
                 if (totalContrib >= stepProj.Amount)
                 {
-                    Console.WriteLine("Deuxieme if");
                     if (!stepsUsers.Any(step => step.Id == stepProj.Id))
                     {
-                        Console.WriteLine("Dernier if");
                         _stepUserRepo.AddStepUser(pc.IdProject, pc.IdUser, stepProj.Id);
                     }
                 }

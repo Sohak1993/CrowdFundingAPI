@@ -9,7 +9,7 @@ Modèle de script de post-déploiement
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-INSERT INTO Role (Name) VALUES
+INSERT INTO [Role] (Name) VALUES
 ('Admin'),
 ('Contributor'),
 ('Owner')
