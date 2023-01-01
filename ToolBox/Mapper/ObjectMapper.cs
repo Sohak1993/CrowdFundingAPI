@@ -9,11 +9,11 @@ namespace ToolBox.Mapper
 {
     public abstract class ObjectMapper
     {
-        public virtual T MapModel<T, U>(U mappedModel)
+        public virtual To MapModel<To, U>(U mappedModel)
         {
-            var type = typeof(T);
+            var type = typeof(To);
 
-            T obj = (T)Activator.CreateInstance(type);
+            To obj = (To)Activator.CreateInstance(type);
 
             foreach (var prop in type.GetProperties())
             {
